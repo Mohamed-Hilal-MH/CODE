@@ -1,0 +1,2917 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="دليلك الشامل لعالم البرمجة: تعرّف على مجالات البرمجة المختلفة، تصفّح خرائط طريق تفصيلية، جرّب الكود مباشرة في المتصفح، واكتشف المسار المناسب لك عبر اختبار تفاعلي.">
+  <meta name="theme-color" content="#0D1426">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+  <title>عالم البرمجة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #060A14;
+      --bg-surface: #0D1426;
+      --bg-card: #111827;
+      --bg-card-hover: #151e30;
+      --electric: #00D4FF;
+      --violet: #7C3AED;
+      --green: #00FF88;
+      --amber: #FFB800;
+      --rose: #FF4D6D;
+      --text-primary: #F0F4FF;
+      --text-secondary: #8B9CC8;
+      --text-muted: #4A5580;
+      --border: rgba(0, 212, 255, 0.12);
+      --glow-electric: 0 0 20px rgba(0, 212, 255, 0.4);
+      --glow-violet: 0 0 20px rgba(124, 58, 237, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── STARFIELD ─── */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(6, 10, 20, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--electric), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      /* تم الإصلاح هنا للتوافقية القياسية */
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--electric);
+    }
+
+    .nav-cta {
+      padding: 0.5rem 1.4rem;
+      border: 1px solid var(--electric);
+      border-radius: 6px;
+      color: var(--electric);
+      background: rgba(0, 212, 255, 0.05);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: rgba(0, 212, 255, 0.15);
+      box-shadow: var(--glow-electric);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      color: var(--electric);
+      background: rgba(0, 212, 255, 0.07);
+      margin-bottom: 2rem;
+      animation: fadeSlideDown 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideDown 0.7s ease 0.1s both;
+    }
+
+    .hero-title .line1 {
+      display: block;
+      color: var(--text-primary);
+    }
+
+    .hero-title .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--electric) 0%, var(--violet) 50%, var(--green) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      /* تم الإصلاح هنا لتجنب التحذير */
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      max-width: 600px;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      animation: fadeSlideDown 0.7s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeSlideDown 0.7s ease 0.3s both;
+    }
+
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: linear-gradient(135deg, var(--electric), var(--violet));
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.35);
+    }
+
+    .btn-primary:hover::after {
+      opacity: 1;
+    }
+
+    .btn-secondary {
+      padding: 0.85rem 2rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--violet);
+      color: var(--text-primary);
+      background: rgba(124, 58, 237, 0.08);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      animation: fadeSlideDown 0.7s ease 0.4s both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--electric);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--electric);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── WHAT IS PROGRAMMING ─── */
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    .what-card {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.3s;
+    }
+
+    .what-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .what-card:nth-child(1) {
+      border-radius: 16px 0 0 0;
+    }
+
+    .what-card:nth-child(2) {
+      border-radius: 0 16px 0 0;
+    }
+
+    .what-card:nth-child(3) {
+      border-radius: 0 0 0 16px;
+    }
+
+    .what-card:nth-child(4) {
+      border-radius: 0 0 16px 0;
+    }
+
+    .what-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .what-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .what-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .what-card .accent-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .what-card:hover .accent-line {
+      transform: scaleX(1);
+    }
+
+    /* ─── FIELDS DASHBOARD ─── */
+    .fields-section {
+      padding: 0 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .fields-nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      padding: 0.5rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .field-tab {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .field-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .field-tab.active {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15));
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .field-content {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .field-content.active {
+      display: block;
+    }
+
+    .field-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .field-info h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .field-info p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 550px;
+    }
+
+    .field-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      min-width: 200px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .meta-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .meta-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    .demand-high {
+      background: rgba(0, 255, 136, 0.12);
+      color: var(--green);
+    }
+
+    .demand-medium {
+      background: rgba(255, 184, 0, 0.12);
+      color: var(--amber);
+    }
+
+    .salary-tag {
+      background: rgba(0, 212, 255, 0.12);
+      color: var(--electric);
+    }
+
+    .time-tag {
+      background: rgba(124, 58, 237, 0.12);
+      color: #A78BFA;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .phase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+
+    .phase-card:hover {
+      border-color: var(--electric);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.1);
+    }
+
+    .phase-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .phase-duration {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--electric);
+      margin-bottom: 1rem;
+    }
+
+    .skills-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skills-list li {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .phase-progress {
+      margin-top: 1rem;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .phase-bar {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--electric), var(--violet));
+    }
+
+    /* ─── ROADMAP VISUAL ─── */
+    .roadmap-visual {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      right: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--electric), var(--violet), var(--green));
+      transform: translateX(50%);
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-item::before {
+      content: attr(data-step);
+      position: absolute;
+      right: 50%;
+      transform: translateX(50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-deep);
+      border: 2px solid var(--electric);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--electric);
+      z-index: 2;
+    }
+
+    .tl-content {
+      width: 42%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 0 4%;
+      transition: all 0.25s;
+    }
+
+    .tl-content:hover {
+      border-color: rgba(0, 212, 255, 0.35);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.08);
+    }
+
+    .tl-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .tl-content p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ─── LANGUAGES ─── */
+    .lang-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .lang-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lang-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .lang-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .lang-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .lang-use {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .lang-bar-wrap {
+      margin-top: 0.8rem;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lang-bar {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ─── QUIZ ─── */
+    .quiz-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .quiz-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+    }
+
+    .quiz-step {
+      display: none;
+    }
+
+    .quiz-step.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .quiz-question {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .quiz-option {
+      padding: 1rem 1.4rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      text-align: right;
+      transition: all 0.2s;
+    }
+
+    .quiz-option:hover {
+      background: rgba(0, 212, 255, 0.06);
+      border-color: var(--electric);
+      color: var(--text-primary);
+    }
+
+    .quiz-option.selected {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: var(--electric);
+      color: var(--text-primary);
+    }
+
+    .quiz-result {
+      text-align: center;
+    }
+
+    .quiz-result-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .quiz-result h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-result p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-result-field {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15));
+      border: 1px solid var(--electric);
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--electric);
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-progress {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .qp-dot {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      transition: background 0.3s;
+    }
+
+    .qp-dot.done {
+      background: var(--electric);
+    }
+
+    .qp-dot.active {
+      background: var(--violet);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--electric), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      /* تم الإصلاح هنا أيضاً */
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-deep);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--violet);
+      border-radius: 3px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .what-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .what-card {
+        border-radius: 0 !important;
+      }
+
+      .what-card:first-child {
+        border-radius: 12px 12px 0 0 !important;
+      }
+
+      .what-card:last-child {
+        border-radius: 0 0 12px 12px !important;
+      }
+
+      .field-header {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        right: 20px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(odd) {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .timeline-item::before {
+        right: 2px;
+        transform: none;
+      }
+
+      .tl-content {
+        width: 85%;
+      }
+
+      .lang-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+    }
+
+    /* Section divider */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--electric), var(--violet));
+      margin: 1rem auto 0;
+      border-radius: 1px;
+    }
+
+    /* Glow orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(0, 212, 255, 0.05);
+      top: 10%;
+      right: -100px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: rgba(124, 58, 237, 0.05);
+      bottom: 20%;
+      left: -150px;
+    }
+
+    /* Code rain effect on hero */
+    .code-rain-line {
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(0, 212, 255, 0.07);
+      animation: rainFall linear infinite;
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    @keyframes rainFall {
+      from {
+        transform: translateY(-100%);
+      }
+
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* ─── SCROLL PROGRESS BAR ─── */
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--electric), var(--violet), var(--green));
+      z-index: 1000;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+      transition: width 0.08s linear;
+    }
+
+    /* ─── CUSTOM CURSOR ─── */
+    @media (hover: hover) and (pointer: fine) {
+      #cursorDot, #cursorRing {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 999;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #cursorDot {
+        width: 6px;
+        height: 6px;
+        background: var(--electric);
+        box-shadow: 0 0 10px var(--electric);
+      }
+
+      #cursorRing {
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(0, 212, 255, 0.45);
+        transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s;
+      }
+
+      #cursorRing.hover-cta {
+        width: 54px;
+        height: 54px;
+        border-color: var(--violet);
+        background: rgba(124, 58, 237, 0.08);
+      }
+
+      body { cursor: none; }
+      a, button, input, textarea, select, .lang-card, .phase-card, .quiz-option, .field-tab, .faq-item, .tl-content { cursor: none; }
+    }
+
+    /* ─── TILT CARDS ─── */
+    .tilt {
+      will-change: transform;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── BACK TO TOP ─── */
+    #backToTop {
+      position: fixed;
+      bottom: 1.6rem;
+      left: 1.6rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--electric);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.3s;
+    }
+
+    #backToTop.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    #backToTop:hover {
+      border-color: var(--electric);
+      box-shadow: var(--glow-electric);
+    }
+
+    /* ─── HERO TERMINAL ─── */
+    .hero-terminal {
+      width: min(560px, 90vw);
+      margin: 2.5rem auto 0;
+      background: rgba(13, 20, 38, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: right;
+      backdrop-filter: blur(10px);
+      animation: fadeSlideDown 0.7s ease 0.45s both;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 0.9rem;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-title {
+      margin-right: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 1.1rem 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      text-align: left;
+      direction: ltr;
+      min-height: 130px;
+    }
+
+    .terminal-body .tk-kw { color: #FF7AB6; }
+    .terminal-body .tk-fn { color: var(--electric); }
+    .terminal-body .tk-str { color: var(--green); }
+    .terminal-body .tk-com { color: var(--text-muted); }
+    .terminal-cursor {
+      display: inline-block;
+      width: 7px;
+      height: 1em;
+      background: var(--electric);
+      vertical-align: text-bottom;
+      animation: pulse 1s steps(2) infinite;
+    }
+
+    /* ─── PLAYGROUND ─── */
+    .playground-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .pg-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .pg-tabs {
+      display: flex;
+      gap: 0.4rem;
+      padding: 0.8rem 1rem 0;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pg-tab {
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px 8px 0 0;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .pg-tab.active {
+      color: var(--electric);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-bottom: 1px solid var(--bg-card);
+      margin-bottom: -1px;
+    }
+
+    .pg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 900px) {
+      .pg-grid { grid-template-columns: 1fr; }
+    }
+
+    .pg-editor-wrap {
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    #pgEditor {
+      width: 100%;
+      height: 320px;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      border: none;
+      resize: vertical;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      padding: 1.2rem;
+      direction: ltr;
+      text-align: left;
+      outline: none;
+    }
+
+    .pg-run-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.2rem;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid var(--border);
+    }
+
+    .pg-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .pg-run-btn {
+      padding: 0.5rem 1.3rem;
+      border-radius: 7px;
+      border: none;
+      background: linear-gradient(135deg, var(--electric), var(--violet));
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .pg-preview-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pg-preview-label {
+      padding: 0.6rem 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #pgFrame {
+      width: 100%;
+      height: 320px;
+      border: none;
+      background: #fff;
+    }
+
+    /* ─── RESOURCES ─── */
+    .resources-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .resources-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .res-tab {
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .res-tab.active {
+      color: var(--text-primary);
+      border-color: var(--electric);
+      background: rgba(0,212,255,0.1);
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .res-card {
+      display: block;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .res-card:hover {
+      border-color: var(--electric);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,212,255,0.1);
+    }
+
+    .res-type {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--electric);
+      background: rgba(0,212,255,0.08);
+      padding: 0.15rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 0.7rem;
+    }
+
+    .res-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+
+    .res-card p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ─── FAQ ─── */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .faq-q .faq-plus {
+      color: var(--electric);
+      transition: transform 0.25s;
+      font-size: 1.2rem;
+    }
+
+    .faq-item.open .faq-plus {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 1.4rem;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 240px;
+      padding: 0 1.4rem 1.3rem;
+    }
+
+    /* ─── CERTIFICATE MODAL ─── */
+    #certModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 14, 0.82);
+      backdrop-filter: blur(6px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    #certModal.show { display: flex; }
+
+    .cert-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      max-width: 620px;
+      width: 100%;
+      text-align: center;
+    }
+
+    #certCanvas {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--border);
+    }
+
+    .cert-actions {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── ACHIEVEMENTS WIDGET ─── */
+    #achieveWidget {
+      position: fixed;
+      bottom: 1.6rem;
+      right: 1.6rem;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.5rem 1rem 0.5rem 0.6rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    }
+
+    #achieveWidget:hover {
+      border-color: var(--amber);
+    }
+
+    #achieveWidget .ach-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--amber), var(--rose));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    #achieveWidget .ach-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    #achievePanel {
+      position: fixed;
+      bottom: 5.2rem;
+      right: 1.6rem;
+      z-index: 91;
+      width: 280px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      display: none;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    #achievePanel.show { display: block; }
+
+    #achievePanel h5 {
+      font-size: 0.85rem;
+      margin-bottom: 0.7rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1px;
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.5rem 0;
+      opacity: 0.35;
+      transition: opacity 0.3s;
+    }
+
+    .badge-row.unlocked { opacity: 1; }
+
+    .badge-row .badge-emoji {
+      font-size: 1.3rem;
+      width: 32px;
+      text-align: center;
+    }
+
+    .badge-row .badge-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .badge-row .badge-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* toast for unlocked achievements */
+    #toastWrap {
+      position: fixed;
+      top: 4.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 950;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border: 1px solid var(--amber);
+      border-radius: 100px;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(255,184,0,0.2);
+      animation: toastIn 0.35s ease, toastOut 0.35s ease 2.6s forwards;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes toastOut {
+      from { opacity: 1; }
+      to { opacity: 0; transform: translateY(-12px); }
+    }
+
+    .toast-warn {
+      border-color: var(--rose) !important;
+      box-shadow: 0 8px 24px rgba(255,77,109,0.25) !important;
+      animation: toastIn 0.35s ease, toastOut 0.35s ease 3.4s forwards !important;
+    }
+
+    .cert-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ─── LANG COMPARE ─── */
+    .compare-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .compare-bar select {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+    }
+
+    #compareResult {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      display: none;
+    }
+
+    #compareResult.show { display: block; }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+
+    .compare-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .compare-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .compare-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .compare-card li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding-right: 1.2rem;
+      position: relative;
+    }
+
+    .compare-card li::before {
+      content: '▸';
+      position: absolute;
+      right: 0;
+      color: var(--electric);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="scrollProgress"></div>
+  <div id="cursorRing"></div>
+  <div id="cursorDot"></div>
+  <div id="toastWrap"></div>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <canvas id="starfield"></canvas>
+
+  <nav>
+    <div class="nav-logo">CODE</div>
+    <div class="nav-links">
+      <a href="#what">ما هي البرمجة؟</a>
+      <a href="#fields">المجالات</a>
+      <a href="#roadmap">المسار</a>
+      <a href="#languages">اللغات</a>
+      <a href="#playground">جرّب الكود</a>
+      <a href="#resources">مصادر</a>
+      <a href="#quiz">اكتشف مجالك</a>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">ابدأ رحلتك
+      ←</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">🌌 دليلك الشامل لعالم البرمجة</div>
+    <h1 class="hero-title">
+      <span class="line1">الكود هو لغة</span>
+      <span class="line2">المستقبل</span>
+    </h1>
+    <p class="hero-desc">
+      اكتشف عالم البرمجة من الصفر — تعرّف على كل المجالات المتاحة، وابدأ مسارك الواضح نحو الاحتراف خطوة بخطوة.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('fields').scrollIntoView({behavior:'smooth'})">🚀
+        استكشف المجالات</button>
+      <button class="btn-secondary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">💡
+        اكتشف مجالك المناسب</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" id="counter1">0</div>
+        <div class="stat-label">مجال برمجي</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="counter2">0</div>
+        <div class="stat-label">لغة برمجة</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="counter3">0M</div>
+        <div class="stat-label">مطور حول العالم</div>
+      </div>
+    </div>
+
+    <div class="hero-terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot" style="background:#FF5F57"></span>
+        <span class="terminal-dot" style="background:#FEBC2E"></span>
+        <span class="terminal-dot" style="background:#28C840"></span>
+        <span class="terminal-title">journey.js</span>
+      </div>
+      <div class="terminal-body" id="heroTerminal"></div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="section-header">
+      <div class="section-eyebrow">// INTRO</div>
+      <h2 class="section-title">ما هي البرمجة؟</h2>
+      <p class="section-sub">البرمجة هي فن إعطاء الحاسوب تعليمات محددة لحل مشاكل وبناء تطبيقات تغير حياة الناس.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-card-icon" style="background:rgba(0,212,255,0.1)">🧠</div>
+        <h3>التفكير المنطقي</h3>
+        <p>البرمجة تعلّمك كيف تفكّر بشكل منظّم لتحليل المشاكل وإيجاد حلول فعّالة — مهارة تستخدمها في كل مجال.</p>
+        <div class="accent-line" style="background:linear-gradient(90deg,var(--electric),transparent)"></div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:rgba(124,58,237,0.1)">🔨</div>
+        <h3>بناء الأدوات</h3>
+        <p>من تطبيقات الهاتف إلى مواقع الويب والذكاء الاصطناعي — كل ما تستخدمه يوميًا بُني بالكود.</p>
+        <div class="accent-line" style="background:linear-gradient(90deg,var(--violet),transparent)"></div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:rgba(0,255,136,0.1)">💰</div>
+        <h3>سوق عمل ضخم</h3>
+        <p>الطلب على المطورين يتضاعف سنويًا. رواتب تنافسية وإمكانية العمل من أي مكان في العالم.</p>
+        <div class="accent-line" style="background:linear-gradient(90deg,var(--green),transparent)"></div>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:rgba(255,184,0,0.1)">🌍</div>
+        <h3>تأثير حقيقي</h3>
+        <p>قررت أن تبني شيئًا يستخدمه الملايين؟ البرمجة هي الطريق الوحيد لتحويل أفكارك إلى واقع ملموس.</p>
+        <div class="accent-line" style="background:linear-gradient(90deg,var(--amber),transparent)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fields">
+    <div class="section-header">
+      <div class="section-eyebrow">// FIELDS</div>
+      <h2 class="section-title">مجالات البرمجة</h2>
+      <p class="section-sub">اختر مجالاً لتعرف ماذا تعلم وكيف تبدأ.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="fields-section">
+      <div class="fields-nav" id="fieldsTabs"></div>
+      <div id="fieldsContent"></div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="section-header">
+      <div class="section-eyebrow">// ROADMAP</div>
+      <h2 class="section-title">المسار العام للمبتدئ</h2>
+      <p class="section-sub">قبل أن تختار تخصصك، هذه الخطوات الأساسية لكل مطور.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="roadmap-visual">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <div class="section-header">
+      <div class="section-eyebrow">// LANGUAGES</div>
+      <h2 class="section-title">لغات البرمجة الأساسية</h2>
+      <p class="section-sub">كل لغة لها غرض — اختر ما يناسب مجالك.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="lang-section">
+      <div class="lang-grid" id="langGrid"></div>
+    </div>
+    <div class="compare-bar">
+      <span>⚖️ قارن بين لغتين:</span>
+      <select id="cmpA"></select>
+      <span>مقابل</span>
+      <select id="cmpB"></select>
+      <button class="btn-secondary" style="padding:0.5rem 1.2rem" onclick="runCompare()">قارن الآن</button>
+    </div>
+    <div id="compareResult">
+      <div class="compare-grid" id="compareGrid"></div>
+    </div>
+  </section>
+
+  <section id="playground">
+    <div class="section-header">
+      <div class="section-eyebrow">// PLAYGROUND</div>
+      <h2 class="section-title">جرّب الكود مباشرة</h2>
+      <p class="section-sub">عدّل الكود بالأسفل واضغط تشغيل لترى النتيجة فورًا — بدون تثبيت أي شيء.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="playground-section">
+      <div class="pg-box">
+        <div class="pg-tabs" id="pgTabs"></div>
+        <div class="pg-grid">
+          <div class="pg-editor-wrap">
+            <textarea id="pgEditor" spellcheck="false"></textarea>
+            <div class="pg-run-row">
+              <span class="pg-hint">HTML + CSS + JS في مكان واحد</span>
+              <button class="pg-run-btn" onclick="runPlayground()">▶ تشغيل</button>
+            </div>
+          </div>
+          <div class="pg-preview-wrap">
+            <div class="pg-preview-label">المعاينة المباشرة</div>
+            <iframe id="pgFrame" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resources">
+    <div class="section-header">
+      <div class="section-eyebrow">// RESOURCES</div>
+      <h2 class="section-title">مصادر تعلّم موثوقة ومجانية</h2>
+      <p class="section-sub">مجموعة مختارة من أفضل المصادر المجانية لكل مجال.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="resources-section">
+      <div class="resources-tabs" id="resTabs"></div>
+      <div class="resources-grid" id="resGrid"></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-header">
+      <div class="section-eyebrow">// FAQ</div>
+      <h2 class="section-title">أسئلة شائعة</h2>
+      <p class="section-sub">إجابات سريعة على أكثر الأسئلة التي تدور في ذهن كل مبتدئ.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="faq-section" id="faqList"></div>
+  </section>
+
+  <section id="quiz">
+    <div class="section-header">
+      <div class="section-eyebrow">// QUIZ</div>
+      <h2 class="section-title">اكتشف مجالك المناسب</h2>
+      <p class="section-sub">أجب على ٤ أسئلة سريعة لنقترح عليك أفضل مسار.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-box">
+        <div class="quiz-progress" id="quizProgress"></div>
+        <div id="quizSteps"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">CODE </div>
+    <p>صُنع بـ ❤️ لكل من يريد تعلّم البرمجة · ابدأ اليوم، لا تنتظر الغد</p>
+  </footer>
+
+  <div id="certModal">
+    <div class="cert-box">
+      <canvas id="certCanvas" width="1000" height="620"></canvas>
+      <div class="cert-actions">
+        <button class="btn-primary" onclick="downloadCert()">⬇ تحميل الشهادة</button>
+        <button class="btn-secondary" onclick="closeCert()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">↑</button>
+
+  <div id="achieveWidget" onclick="toggleAchievePanel()">
+    <span class="ach-icon">🏆</span>
+    <span class="ach-count" id="achCount">0/6</span>
+  </div>
+  <div id="achievePanel">
+    <h5>// إنجازاتك في هذه الجلسة</h5>
+    <div id="badgeList"></div>
+  </div>
+
+  <script>
+    // ──────────────────────────────────────────────
+    //  STARFIELD
+    // ──────────────────────────────────────────────
+    (function () {
+      const c = document.getElementById('starfield');
+      const ctx = c.getContext('2d');
+      let stars = [];
+      function resize() { c.width = window.innerWidth; c.height = window.innerHeight; init(); }
+      function init() {
+        stars = [];
+        for (let i = 0; i < 160; i++) {
+          stars.push({
+            x: Math.random() * c.width, y: Math.random() * c.height,
+            r: Math.random() * 1.2, o: Math.random(), s: Math.random() * 0.3 + 0.05
+          });
+        }
+      }
+      function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        stars.forEach(s => {
+          s.o += s.s * 0.02; if (s.o > 1 || s.o < 0) s.s *= -1;
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(176,196,255,${s.o * 0.6})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      window.addEventListener('resize', resize);
+      resize(); draw();
+    })();
+
+    // ──────────────────────────────────────────────
+    //  COUNTER ANIMATION
+    // ──────────────────────────────────────────────
+    function animCounter(el, target, suffix = '', dur = 1800) {
+      let start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / dur, 1);
+        el.textContent = Math.floor(p * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const countersObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animCounter(document.getElementById('counter1'), 8);
+          animCounter(document.getElementById('counter2'), 50, '+');
+          animCounter(document.getElementById('counter3'), 30, 'M+');
+          countersObs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    countersObs.observe(document.getElementById('counter1'));
+
+    // ──────────────────────────────────────────────
+    //  FIELDS DATA
+    // ──────────────────────────────────────────────
+    const fields = [
+      {
+        id: 'web', icon: '🌐', name: 'تطوير الويب',
+        color: '#00D4FF',
+        desc: 'بناء مواقع الإنترنت والتطبيقات التي يستخدمها الناس يوميًا. من صفحات الشركات إلى منصات مثل يوتيوب وإنستغرام.',
+        demand: 'عالي جدًا', salary: '$60K–$150K', time: '6–12 شهرًا',
+        phases: [
+          { num: '01', title: 'الأساسيات', duration: 'الشهر 1–2', skills: ['HTML', 'CSS', 'Git', 'VS Code'], prog: 100 },
+          { num: '02', title: 'JavaScript', duration: 'الشهر 3–4', skills: ['ES6+', 'DOM', 'Async', 'Fetch API'], prog: 90 },
+          { num: '03', title: 'Frontend Framework', duration: 'الشهر 5–7', skills: ['React.js', 'Next.js', 'Tailwind CSS', 'State Management'], prog: 75 },
+          { num: '04', title: 'Backend', duration: 'الشهر 8–10', skills: ['Node.js', 'Express', 'REST API', 'SQL/NoSQL'], prog: 60 },
+          { num: '05', title: 'Deploy & DevOps', duration: 'الشهر 11–12', skills: ['Docker', 'Vercel', 'CI/CD', 'Linux basics'], prog: 40 },
+          { num: '06', title: 'المشاريع الاحترافية', duration: 'الشهر 13+', skills: ['Portfolio', 'Freelance', 'GitHub', 'Open Source'], prog: 20 },
+        ]
+      },
+      {
+        id: 'ai', icon: '🤖', name: 'الذكاء الاصطناعي',
+        color: '#7C3AED',
+        desc: 'تعليم الآلات كيف تفكر وتتعلم. من نماذج اللغة الكبيرة كـ GPT إلى التعرف على الصور والتوصيات.',
+        demand: 'عالي جدًا', salary: '$80K–$200K', time: '12–18 شهرًا',
+        phases: [
+          { num: '01', title: 'الرياضيات الأساسية', duration: 'الشهر 1–2', skills: ['Linear Algebra', 'Statistics', 'Calculus', 'Probability'], prog: 100 },
+          { num: '02', title: 'Python للبيانات', duration: 'الشهر 3–4', skills: ['NumPy', 'Pandas', 'Matplotlib', 'Jupyter'], prog: 90 },
+          { num: '03', title: 'Machine Learning', duration: 'الشهر 5–8', skills: ['Scikit-learn', 'Regression', 'Classification', 'Neural Nets'], prog: 75 },
+          { num: '04', title: 'Deep Learning', duration: 'الشهر 9–12', skills: ['TensorFlow', 'PyTorch', 'CNN', 'RNN', 'Transformers'], prog: 55 },
+          { num: '05', title: 'LLMs & GenAI', duration: 'الشهر 13–16', skills: ['HuggingFace', 'LangChain', 'Fine-tuning', 'RAG'], prog: 35 },
+          { num: '06', title: 'النشر والتحسين', duration: 'الشهر 17+', skills: ['MLflow', 'Kubernetes', 'A/B Testing', 'Monitoring'], prog: 20 },
+        ]
+      },
+      {
+        id: 'mobile', icon: '📱', name: 'تطبيقات الجوال',
+        color: '#00FF88',
+        desc: 'بناء تطبيقات iOS وAndroid التي يحملها الناس في جيوبهم. من التطبيقات الناشئة إلى تطبيقات الشركات الكبرى.',
+        demand: 'عالي', salary: '$65K–$160K', time: '8–14 شهرًا',
+        phases: [
+          { num: '01', title: 'أساسيات البرمجة', duration: 'الشهر 1–2', skills: ['OOP', 'Git', 'Algorithms', 'Data Structures'], prog: 100 },
+          { num: '02', title: 'اختيار المسار', duration: 'الشهر 3', skills: ['Flutter/Dart', 'React Native', 'Swift', 'Kotlin'], prog: 95 },
+          { num: '03', title: 'تطوير الواجهات', duration: 'الشهر 4–6', skills: ['UI Components', 'Navigation', 'State', 'Animations'], prog: 75 },
+          { num: '04', title: 'الباكند والبيانات', duration: 'الشهر 7–9', skills: ['Firebase', 'REST APIs', 'SQLite', 'Auth'], prog: 60 },
+          { num: '05', title: 'النشر', duration: 'الشهر 10–12', skills: ['App Store', 'Google Play', 'Testing', 'CI/CD'], prog: 40 },
+          { num: '06', title: 'الاحتراف', duration: 'الشهر 13+', skills: ['Performance', 'Push Notifs', 'Analytics', 'Monetization'], prog: 20 },
+        ]
+      },
+      {
+        id: 'cyber', icon: '🔐', name: 'الأمن السيبراني',
+        color: '#FF4D6D',
+        desc: 'حماية الأنظمة والشبكات من الاختراق والهجمات الإلكترونية. مجال شهير برواتب ضخمة وطلب لا يتوقف.',
+        demand: 'عالي جدًا', salary: '$70K–$180K', time: '10–18 شهرًا',
+        phases: [
+          { num: '01', title: 'شبكات وأنظمة', duration: 'الشهر 1–3', skills: ['TCP/IP', 'Linux', 'Networking', 'OSI Model'], prog: 100 },
+          { num: '02', title: 'أدوات الأمن', duration: 'الشهر 4–6', skills: ['Kali Linux', 'Wireshark', 'Nmap', 'Metasploit'], prog: 80 },
+          { num: '03', title: 'اختبار الاختراق', duration: 'الشهر 7–9', skills: ['Web Pentest', 'OWASP Top 10', 'CTF', 'Bug Bounty'], prog: 65 },
+          { num: '04', title: 'الشهادات', duration: 'الشهر 10–12', skills: ['Security+', 'CEH', 'OSCP', 'CISSP'], prog: 50 },
+          { num: '05', title: 'التخصص', duration: 'الشهر 13+', skills: ['Forensics', 'Malware Analysis', 'SOC', 'Red Team'], prog: 30 },
+        ]
+      },
+      {
+        id: 'data', icon: '📊', name: 'علم البيانات',
+        color: '#FFB800',
+        desc: 'استخراج المعرفة والقيمة من البيانات الضخمة. تحليل السلوكيات واتخاذ قرارات ذكية تعتمد على الأرقام.',
+        demand: 'عالي', salary: '$70K–$170K', time: '10–16 شهرًا',
+        phases: [
+          { num: '01', title: 'الإحصاء والرياضيات', duration: 'الشهر 1–2', skills: ['Statistics', 'Probability', 'Excel', 'SQL'], prog: 100 },
+          { num: '02', title: 'Python للبيانات', duration: 'الشهر 3–5', skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn'], prog: 85 },
+          { num: '03', title: 'تحليل البيانات', duration: 'الشهر 6–8', skills: ['EDA', 'Data Cleaning', 'Storytelling', 'Tableau'], prog: 70 },
+          { num: '04', title: 'Machine Learning', duration: 'الشهر 9–12', skills: ['Scikit-learn', 'Feature Eng', 'Model Eval', 'Regression'], prog: 55 },
+          { num: '05', title: 'Big Data', duration: 'الشهر 13+', skills: ['Spark', 'Hadoop', 'BigQuery', 'dbt', 'Airflow'], prog: 30 },
+        ]
+      },
+      {
+        id: 'gamedev', icon: '🎮', name: 'تطوير الألعاب',
+        color: '#A78BFA',
+        desc: 'بناء عوالم تفاعلية وتجارب لعب لا تُنسى. من الألعاب المستقلة إلى ألعاب AAA بالأبعاد الثلاثة.',
+        demand: 'متوسط', salary: '$50K–$130K', time: '12–20 شهرًا',
+        phases: [
+          { num: '01', title: 'أساسيات البرمجة', duration: 'الشهر 1–2', skills: ['C#', 'OOP', 'Data Structures', 'Math'], prog: 100 },
+          { num: '02', title: 'محرك الألعاب', duration: 'الشهر 3–6', skills: ['Unity', 'Unreal Engine', '2D/3D', 'Physics'], prog: 80 },
+          { num: '03', title: 'منطق الألعاب', duration: 'الشهر 7–10', skills: ['Game Loop', 'AI Bots', 'Collision', 'Levels'], prog: 65 },
+          { num: '04', title: 'الجرافيكس والصوت', duration: 'الشهر 11–14', skills: ['Shaders', 'Animations', 'Audio', 'VFX'], prog: 45 },
+          { num: '05', title: 'النشر والتوزيع', duration: 'الشهر 15+', skills: ['Steam', 'Itch.io', 'Monetization', 'Updates'], prog: 25 },
+        ]
+      },
+      {
+        id: 'devops', icon: '⚙️', name: 'DevOps & Cloud',
+        color: '#38BDF8',
+        desc: 'بناء وإدارة البنية التحتية التي تشغّل تطبيقات الملايين. الجسر بين فرق التطوير وفرق التشغيل.',
+        demand: 'عالي', salary: '$80K–$200K', time: '10–16 شهرًا',
+        phases: [
+          { num: '01', title: 'Linux والشبكات', duration: 'الشهر 1–2', skills: ['Bash', 'Linux', 'Networking', 'SSH'], prog: 100 },
+          { num: '02', title: 'الـ Containers', duration: 'الشهر 3–5', skills: ['Docker', 'Kubernetes', 'Docker Compose', 'Helm'], prog: 80 },
+          { num: '03', title: 'CI/CD', duration: 'الشهر 6–8', skills: ['GitHub Actions', 'Jenkins', 'GitLab CI', 'ArgoCD'], prog: 65 },
+          { num: '04', title: 'الحوسبة السحابية', duration: 'الشهر 9–12', skills: ['AWS', 'Azure', 'GCP', 'Terraform'], prog: 50 },
+          { num: '05', title: 'المراقبة والأمن', duration: 'الشهر 13+', skills: ['Prometheus', 'Grafana', 'ELK Stack', 'Security'], prog: 30 },
+        ]
+      },
+      {
+        id: 'embedded', icon: '🔬', name: 'الأنظمة المدمجة',
+        color: '#F97316',
+        desc: 'برمجة الأجهزة الذكية والروبوتات والـ IoT. من Arduino إلى الطائرات المسيّرة والمركبات الذاتية.',
+        demand: 'متوسط-عالي', salary: '$65K–$150K', time: '12–18 شهرًا',
+        phases: [
+          { num: '01', title: 'الإلكترونيات والـ C', duration: 'الشهر 1–3', skills: ['C Language', 'Electronics', 'Arduino', 'Circuits'], prog: 100 },
+          { num: '02', title: 'الأنظمة المدمجة', duration: 'الشهر 4–7', skills: ['RTOS', 'Microcontrollers', 'GPIO', 'SPI/I2C'], prog: 80 },
+          { num: '03', title: 'البروتوكولات', duration: 'الشهر 8–10', skills: ['UART', 'CAN Bus', 'MQTT', 'Bluetooth/WiFi'], prog: 65 },
+          { num: '04', title: 'Linux المدمج', duration: 'الشهر 11–14', skills: ['Yocto', 'Raspberry Pi', 'Device Drivers', 'Kernel'], prog: 45 },
+          { num: '05', title: 'التطبيق العملي', duration: 'الشهر 15+', skills: ['Robotics', 'Drones', 'IoT', 'Automotive'], prog: 25 },
+        ]
+      },
+    ];
+
+    // ──────────────────────────────────────────────
+    //  RENDER FIELDS
+    // ──────────────────────────────────────────────
+    const tabsEl = document.getElementById('fieldsTabs');
+    const contentEl = document.getElementById('fieldsContent');
+
+    fields.forEach((f, i) => {
+      // Tab
+      const tab = document.createElement('button');
+      tab.className = 'field-tab' + (i === 0 ? ' active' : '');
+      tab.innerHTML = `${f.icon} ${f.name}`;
+      tab.dataset.id = f.id;
+      tab.onclick = () => {
+        document.querySelectorAll('.field-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.field-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('fc-' + f.id).classList.add('active');
+      };
+      tabsEl.appendChild(tab);
+
+      // Content
+      const div = document.createElement('div');
+      div.className = 'field-content' + (i === 0 ? ' active' : '');
+      div.id = 'fc-' + f.id;
+
+      const demandClass = f.demand.includes('جدًا') ? 'demand-high' : 'demand-medium';
+
+      div.innerHTML = `
+    <div class="field-header">
+      <div class="field-info">
+        <h2 style="color:${f.color}">${f.icon} ${f.name}</h2>
+        <p>${f.desc}</p>
+      </div>
+      <div class="field-meta">
+        <div class="meta-item">
+          <span class="meta-label">الطلب في السوق</span>
+          <span class="meta-val ${demandClass}">${f.demand}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">متوسط الراتب</span>
+          <span class="meta-val salary-tag">${f.salary}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">وقت الوصول</span>
+          <span class="meta-val time-tag">${f.time}</span>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-grid">
+      ${f.phases.map(ph => `
+        <div class="phase-card">
+          <div class="phase-num">المرحلة ${ph.num}</div>
+          <div class="phase-title">${ph.title}</div>
+          <div class="phase-duration">⏱ ${ph.duration}</div>
+          <ul class="skills-list">
+            ${ph.skills.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+          <div class="phase-progress">
+            <div class="phase-bar" style="width:0%;background:linear-gradient(90deg,${f.color},var(--violet))" data-target="${ph.prog}"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+      contentEl.appendChild(div);
+    });
+
+    // Animate bars on visibility
+    const barObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const bar = e.target;
+          bar.style.width = bar.dataset.target + '%';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.phase-bar').forEach(b => barObs.observe(b));
+
+    // ──────────────────────────────────────────────
+    //  TIMELINE DATA
+    // ──────────────────────────────────────────────
+    const steps = [
+      { step: 1, title: 'اختر لغتك الأولى', text: 'Python أو JavaScript — كلاهما مثالي للمبتدئين. لا تقضِ أكثر من يومين في الاختيار.' },
+      { step: 2, title: 'تعلّم الأساسيات', text: 'المتغيرات، الدوال، الحلقات، الشروط. هذه اللبنات موجودة في كل لغة.' },
+      { step: 3, title: 'حل المسائل يوميًا', text: 'مواقع مثل LeetCode وHackerRank تطوّر تفكيرك. 30 دقيقة يومية تحدث فرقًا ضخمًا.' },
+      { step: 4, title: 'ابنِ مشروعًا صغيرًا', text: 'آلة حاسبة، قائمة مهام، موقع شخصي. التطبيق يعلّمك أكثر من ألف درس نظري.' },
+      { step: 5, title: 'اختر تخصصك', text: 'بعد الأساسيات ستعرف أين يكمن شغفك. ويب؟ ذكاء اصطناعي؟ جوال؟ اختر وانطلق.' },
+      { step: 6, title: 'تعلّم Git وGitHub', text: 'أداة لا غنى عنها لأي مطور. سجّل مشاريعك وتعاون مع الآخرين.' },
+      { step: 7, title: 'أنشئ محفظة أعمال', text: 'Portfolio احترافي يُظهر ما تستطيع فعله أفضل من أي شهادة.' },
+      { step: 8, title: 'انضم للمجتمع', text: 'Discord، Reddit، GitHub، مؤتمرات. الشبكة أهم مما تتخيل.' },
+    ];
+
+    const tlEl = document.getElementById('timeline');
+    steps.forEach(s => {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+      item.dataset.step = s.step;
+      item.innerHTML = `<div class="tl-content"><h4>${s.title}</h4><p>${s.text}</p></div>`;
+      tlEl.appendChild(item);
+    });
+
+    // ──────────────────────────────────────────────
+    //  LANGUAGES
+    // ──────────────────────────────────────────────
+    const langs = [
+      { icon: '🐍', name: 'Python', use: 'AI, Data, Backend', color: '#FFD43B', pop: 85 },
+      { icon: '🟨', name: 'JavaScript', use: 'Web, Full-stack', color: '#F7DF1E', pop: 95 },
+      { icon: '⚛️', name: 'TypeScript', use: 'Web, Node.js', color: '#3178C6', pop: 80 },
+      { icon: '☕', name: 'Java', use: 'Android, Backend', color: '#FF6B35', pop: 75 },
+      { icon: '🦀', name: 'Rust', use: 'Systems, WASM', color: '#FF4D00', pop: 55 },
+      { icon: '🐹', name: 'Go', use: 'Backend, DevOps', color: '#00ACD7', pop: 65 },
+      { icon: '🎯', name: 'Dart', use: 'Flutter, Mobile', color: '#0175C2', pop: 60 },
+      { icon: '💎', name: 'Swift', use: 'iOS, macOS', color: '#FF6B35', pop: 60 },
+      { icon: '🎮', name: 'C#', use: 'Unity, .NET', color: '#9B59B6', pop: 70 },
+      { icon: '⚡', name: 'C++', use: 'Games, Embedded', color: '#00599C', pop: 65 },
+      { icon: '🐘', name: 'PHP', use: 'WordPress, Web', color: '#8892BF', pop: 50 },
+      { icon: '💎', name: 'Ruby', use: 'Rails, Scripting', color: '#CC342D', pop: 40 },
+      { icon: '🔬', name: 'R', use: 'Statistics, Data', color: '#2765AE', pop: 45 },
+      { icon: '⚡', name: 'Kotlin', use: 'Android, JVM', color: '#7F52FF', pop: 58 },
+      { icon: '🌊', name: 'Scala', use: 'Big Data, JVM', color: '#DC322F', pop: 38 },
+      { icon: '🦀', name: 'SQL', use: 'Databases', color: '#00D4FF', pop: 88 },
+    ];
+
+    const lgEl = document.getElementById('langGrid');
+    langs.forEach(l => {
+      const card = document.createElement('div');
+      card.className = 'lang-card';
+      card.style.setProperty('--accent', l.color);
+      card.innerHTML = `
+    <span class="lang-icon">${l.icon}</span>
+    <div class="lang-name">${l.name}</div>
+    <div class="lang-use">${l.use}</div>
+    <div class="lang-bar-wrap">
+      <div class="lang-bar" style="width:0%;background:${l.color}" data-target="${l.pop}"></div>
+    </div>
+  `;
+      card.addEventListener('mouseenter', () => { card.style.borderColor = l.color; card.style.boxShadow = `0 8px 30px ${l.color}22`; });
+      card.addEventListener('mouseleave', () => { card.style.borderColor = ''; card.style.boxShadow = ''; });
+      lgEl.appendChild(card);
+    });
+
+    const langBarObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.lang-bar').forEach(b => { b.style.width = b.dataset.target + '%'; });
+        }
+      });
+    }, { threshold: 0.2 });
+    langBarObs.observe(lgEl);
+
+    // ──────────────────────────────────────────────
+    //  QUIZ
+    // ──────────────────────────────────────────────
+    const quizData = [
+      {
+        q: 'ما الذي يجذبك أكثر في التكنولوجيا؟',
+        opts: [
+          { text: 'بناء مواقع جميلة يراها الناس', val: 'web' },
+          { text: 'تعليم الآلات والتنبؤ بالمستقبل', val: 'ai' },
+          { text: 'تطبيقات الجوال في يد الجميع', val: 'mobile' },
+          { text: 'الألغاز الأمنية واختراق الأنظمة', val: 'cyber' },
+        ]
+      },
+      {
+        q: 'ماذا تفضّل أن تفعل في وقت فراغك؟',
+        opts: [
+          { text: 'تصميم واجهات جميلة ومتحركة', val: 'web' },
+          { text: 'تحليل الأرقام وإيجاد الأنماط', val: 'data' },
+          { text: 'لعب الألعاب والتفكير في صناعتها', val: 'gamedev' },
+          { text: 'إعداد وتنظيم الأنظمة والخوادم', val: 'devops' },
+        ]
+      },
+      {
+        q: 'ما أبرز شيء تريد الوصول إليه؟',
+        opts: [
+          { text: 'مشروع ناشئ يغير العالم', val: 'ai' },
+          { text: 'عمل مرن مع عملاء من حول العالم', val: 'web' },
+          { text: 'تطبيق بملايين المستخدمين', val: 'mobile' },
+          { text: 'راتب ضخم وحماية المؤسسات الكبرى', val: 'cyber' },
+        ]
+      },
+      {
+        q: 'ما نقطة قوتك الأساسية؟',
+        opts: [
+          { text: 'الإبداع والتصميم البصري', val: 'web' },
+          { text: 'التحليل المنطقي والرياضيات', val: 'data' },
+          { text: 'الصبر على تتبع الأخطاء والتفاصيل', val: 'cyber' },
+          { text: 'التنظيم وإدارة التعقيد', val: 'devops' },
+        ]
+      }
+    ];
+
+    const fieldMap = {
+      web: { name: 'تطوير الويب 🌐', emoji: '🌐', desc: 'أنت مناسب لبناء مواقع وتطبيقات ويب. ابدأ بـ HTML، CSS، ثم JavaScript وReact.' },
+      ai: { name: 'الذكاء الاصطناعي 🤖', emoji: '🤖', desc: 'لديك تفكير تحليلي قوي. تعلّم Python ثم مكتبات ML مثل Scikit-learn وPyTorch.' },
+      mobile: { name: 'تطبيقات الجوال 📱', emoji: '📱', desc: 'أنت مناسب لبناء تطبيقات iOS/Android. ابدأ بـ Flutter أو React Native.' },
+      cyber: { name: 'الأمن السيبراني 🔐', emoji: '🔐', desc: 'لديك ميل للتحقيق والحماية. تعلّم Linux والشبكات وابدأ بحل تحديات CTF.' },
+      data: { name: 'علم البيانات 📊', emoji: '📊', desc: 'أنت محلل بطبعك. تعلّم Python وSQL ثم ابدأ في تحليل البيانات.' },
+      gamedev: { name: 'تطوير الألعاب 🎮', emoji: '🎮', desc: 'إبداعك يناسب صناعة الألعاب. ابدأ بـ Unity وتعلّم C# بشكل موازٍ.' },
+      devops: { name: 'DevOps & Cloud ⚙️', emoji: '⚙️', desc: 'أنت منظّم ومحب للأنظمة. تعلّم Linux ثم Docker وKubernetes والـ Cloud.' },
+    };
+
+    let quizAnswers = {};
+
+    function initQuiz() {
+      const steps = document.getElementById('quizSteps');
+      const progress = document.getElementById('quizProgress');
+
+      // Progress dots
+      quizData.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'qp-dot' + (i === 0 ? ' active' : '');
+        dot.id = 'qp-' + i;
+        progress.appendChild(dot);
+      });
+
+      // Steps
+      quizData.forEach((q, qi) => {
+        const div = document.createElement('div');
+        div.className = 'quiz-step' + (qi === 0 ? ' active' : '');
+        div.id = 'qs-' + qi;
+        div.innerHTML = `
+      <div class="quiz-question">${qi + 1}. ${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o, oi) => `
+          <button class="quiz-option" data-qi="${qi}" data-oi="${oi}" data-val="${o.val}" onclick="pickOption(this)">${o.text}</button>
+        `).join('')}
+      </div>
+    `;
+        steps.appendChild(div);
+      });
+
+      // Result step
+      const res = document.createElement('div');
+      res.className = 'quiz-step';
+      res.id = 'qs-result';
+      res.innerHTML = `<div class="quiz-result" id="quizResultBox"></div>`;
+      steps.appendChild(res);
+    }
+
+    function pickOption(btn) {
+      const qi = parseInt(btn.dataset.qi, 10);
+      const val = btn.dataset.val;
+      quizAnswers[qi] = val;
+
+      // Highlight
+      document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      // Next after delay
+      setTimeout(() => {
+        document.getElementById('qs-' + qi).classList.remove('active');
+        const dot = document.getElementById('qp-' + qi);
+        if (dot) {
+          dot.classList.remove('active');
+          dot.classList.add('done');
+        }
+
+        if (qi < quizData.length - 1) {
+          document.getElementById('qs-' + (qi + 1)).classList.add('active');
+          const nextDot = document.getElementById('qp-' + (qi + 1));
+          if (nextDot) nextDot.classList.add('active');
+        } else {
+          showResult();
+        }
+      }, 380);
+    }
+
+    function showResult() {
+      const res = document.getElementById('qs-result');
+      res.classList.add('active');
+      document.getElementById('quizProgress').querySelectorAll('.qp-dot').forEach(d => {
+        d.classList.remove('active'); d.classList.add('done');
+      });
+
+      // Count answers
+      const tally = {};
+      Object.values(quizAnswers).forEach(v => { tally[v] = (tally[v] || 0) + 1; });
+      const top = Object.entries(tally).sort((a, b) => b[1] - a[1])[0][0];
+      const field = fieldMap[top] || fieldMap.web;
+
+      document.getElementById('quizResultBox').innerHTML = `
+    <div class="quiz-result-icon">${field.emoji}</div>
+    <h3>مجالك المثالي</h3>
+    <div class="quiz-result-field">${field.name}</div>
+    <p>${field.desc}</p>
+    <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+      <button class="btn-primary" onclick="openCert('${field.name.replace(/'/g, "\\'")}')">🎓 احصل على شهادتك</button>
+      <button class="btn-secondary" onclick="restartQuiz()">🔄 أعِد الاختبار</button>
+    </div>
+    <p class="cert-hint" id="certHint"></p>
+  `;
+      unlockBadge('quiz');
+      updateCertHint();
+    }
+
+    function updateCertHint() {
+      const hintEl = document.getElementById('certHint');
+      if (!hintEl) return;
+      const total = Object.keys(badges).length;
+      if (unlocked.size >= total) {
+        hintEl.innerHTML = '🎉 أكملت جميع التحديات الست — شهادتك جاهزة للاستخراج!';
+        hintEl.style.color = 'var(--green)';
+      } else {
+        const missing = Object.keys(badges).filter(k => !unlocked.has(k)).map(k => badges[k].name);
+        hintEl.innerHTML = `🔒 الشهادة تُفتح بعد إكمال التحديات الست (🏆) — تبقّى لديك: ${missing.join('، ')}`;
+        hintEl.style.color = 'var(--text-muted)';
+      }
+    }
+
+    function restartQuiz() {
+      quizAnswers = {};
+      document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.qp-dot').forEach((d, i) => {
+        d.classList.remove('done', 'active');
+        if (i === 0) d.classList.add('active');
+      });
+      document.getElementById('qs-0').classList.add('active');
+    }
+
+    initQuiz();
+
+    // ──────────────────────────────────────────────
+    //  SCROLL PROGRESS BAR
+    // ──────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrolled + '%';
+      document.getElementById('backToTop').classList.toggle('show', h.scrollTop > 600);
+    });
+
+    // ──────────────────────────────────────────────
+    //  CUSTOM CURSOR
+    // ──────────────────────────────────────────────
+    (function () {
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (!dot || !ring || window.matchMedia('(hover: none)').matches) return;
+      let rx = 0, ry = 0, tx = 0, ty = 0;
+      window.addEventListener('mousemove', e => {
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+        tx = e.clientX; ty = e.clientY;
+      });
+      function loop() {
+        rx += (tx - rx) * 0.18;
+        ry += (ty - ry) * 0.18;
+        ring.style.left = rx + 'px';
+        ring.style.top = ry + 'px';
+        requestAnimationFrame(loop);
+      }
+      loop();
+      document.addEventListener('mouseover', e => {
+        if (e.target.closest('a, button, input, textarea, select, .lang-card, .phase-card, .quiz-option, .field-tab, .faq-item, .tl-content')) {
+          ring.classList.add('hover-cta');
+        }
+      });
+      document.addEventListener('mouseout', e => {
+        if (e.target.closest('a, button, input, textarea, select, .lang-card, .phase-card, .quiz-option, .field-tab, .faq-item, .tl-content')) {
+          ring.classList.remove('hover-cta');
+        }
+      });
+    })();
+
+    // ──────────────────────────────────────────────
+    //  TILT EFFECT (event delegation, works on dynamically created cards)
+    // ──────────────────────────────────────────────
+    (function () {
+      const selector = '.lang-card, .phase-card, .what-card, .tl-content';
+      document.addEventListener('mousemove', e => {
+        const card = e.target.closest(selector);
+        if (!card) return;
+        card.classList.add('tilt');
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(700px) rotateX(${-py * 7}deg) rotateY(${px * 7}deg) translateY(-2px)`;
+      });
+      document.addEventListener('mouseleave', e => {
+        const card = e.target.closest && e.target.closest(selector);
+        if (card) card.style.transform = '';
+      }, true);
+    })();
+
+    // ──────────────────────────────────────────────
+    //  SCROLL REVEAL
+    // ──────────────────────────────────────────────
+    (function () {
+      const targets = document.querySelectorAll('.section-header, .what-card, .field-header, .roadmap-grid, .quiz-box, .pg-box, .faq-item, .res-card, .compare-bar');
+      targets.forEach(t => t.classList.add('reveal'));
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+      }, { threshold: 0.12 });
+      // re-scan periodically since content is generated dynamically
+      function scan() {
+        document.querySelectorAll('.reveal:not(.in)').forEach(t => obs.observe(t));
+      }
+      scan();
+      setTimeout(scan, 400);
+      setTimeout(scan, 1200);
+    })();
+
+    // ──────────────────────────────────────────────
+    //  HERO TERMINAL TYPING ANIMATION
+    // ──────────────────────────────────────────────
+    (function () {
+      const lines = [
+        '<span class="tk-com">// رحلتك تبدأ بسطر واحد</span>',
+        '<span class="tk-kw">const</span> <span class="tk-fn">developer</span> = <span class="tk-str">"أنت"</span>;',
+        '<span class="tk-kw">function</span> <span class="tk-fn">buildFuture</span>() {',
+        '&nbsp;&nbsp;<span class="tk-kw">return</span> <span class="tk-str">"لا تنتظر — ابدأ الآن"</span>;',
+        '}'
+      ];
+      const el = document.getElementById('heroTerminal');
+      if (!el) return;
+      let li = 0;
+      function typeLine() {
+        if (li >= lines.length) {
+          el.insertAdjacentHTML('beforeend', '<span class="terminal-cursor"></span>');
+          return;
+        }
+        const full = lines[li];
+        const plain = full.replace(/<[^>]+>/g, '');
+        let ci = 0;
+        const row = document.createElement('div');
+        el.appendChild(row);
+        const iv = setInterval(() => {
+          ci++;
+          // reveal proportionally using the plain length but render tags fully once done
+          if (ci >= plain.length) {
+            row.innerHTML = full;
+            clearInterval(iv);
+            li++;
+            setTimeout(typeLine, 160);
+          } else {
+            row.textContent = plain.slice(0, ci);
+          }
+        }, 22);
+      }
+      const heroObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { typeLine(); heroObs.disconnect(); } });
+      }, { threshold: 0.3 });
+      heroObs.observe(el);
+    })();
+
+    // ──────────────────────────────────────────────
+    //  LANGUAGE COMPARE TOOL
+    // ──────────────────────────────────────────────
+    const langInfo = {
+      'Python': ['بنية بسيطة وقريبة من اللغة الطبيعية، مثالية للمبتدئين', 'الخيار الأول في الذكاء الاصطناعي وتحليل البيانات', 'مكتبات ضخمة مثل NumPy وPandas وTensorFlow', 'أبطأ نسبيًا من اللغات المُصرّفة مباشرة'],
+      'JavaScript': ['اللغة الوحيدة التي تعمل أصلاً داخل المتصفح', 'تصلح للواجهة والباك-إند عبر Node.js', 'مجتمع ضخم وفرص عمل واسعة جدًا', 'النظام الديناميكي للأنواع قد يسبب أخطاء غير متوقعة'],
+      'TypeScript': ['JavaScript مع أنواع ثابتة تقلل الأخطاء مبكرًا', 'مفضّلة في المشاريع والفرق الكبيرة', 'تحتاج خطوة تحويل (compile) قبل التشغيل', 'منحنى تعلم إضافي بسيط فوق JavaScript'],
+      'Java': ['منصة مستقرة وموثوقة في بيئات الشركات الكبرى', 'أساس تطوير أندرويد التقليدي', 'أداء جيد وإدارة ذاكرة تلقائية', 'أكثر إطالة (verbose) من لغات حديثة أخرى'],
+      'Rust': ['أمان الذاكرة دون الحاجة لـ garbage collector', 'أداء قريب جدًا من C++', 'يستخدم بكثرة في الأنظمة وWebAssembly', 'منحنى تعلم حاد نسبيًا للمبتدئين'],
+      'Go': ['بساطة في الصياغة وسرعة تصريف عالية', 'دعم أصلي وقوي للـ concurrency', 'ممتازة لأنظمة الخوادم والـ DevOps', 'نظام أنواع بسيط قد يبدو محدودًا لبعض المطورين'],
+      'Dart': ['صُمّمت خصيصًا لإطار Flutter', 'تبني تطبيقًا واحدًا يعمل على iOS وAndroid والويب', 'أداء جيد بفضل التصريف المسبق (AOT)', 'مجتمع أصغر مقارنة بلغات الجوال الأخرى'],
+      'Swift': ['اللغة الرسمية لتطبيقات iOS وmacOS', 'أداء عالٍ وأمان قوي في التعامل مع الأنواع', 'صياغة حديثة وواضحة', 'محدودة النطاق خارج منظومة أبل'],
+      'C#': ['قوية في تطوير الألعاب عبر محرك Unity', 'مدعومة رسميًا من مايكروسوفت عبر .NET', 'مناسبة لتطبيقات ويندوز والأنظمة المؤسسية', 'مرتبطة تاريخيًا بمنظومة مايكروسوفت'],
+      'C++': ['تحكم دقيق جدًا بالذاكرة والأداء', 'الخيار الأساسي في الألعاب والأنظمة المدمجة', 'مستخدمة في البرمجيات عالية الأداء والمحاكاة', 'منحنى تعلم صعب نسبيًا للمبتدئين'],
+      'PHP': ['سهلة الدمج مع صفحات الويب التقليدية', 'تشغّل جزءًا كبيرًا من الإنترنت عبر ووردبريس', 'مجتمع كبير وموارد تعليمية وفيرة', 'شعبيتها تراجعت مقارنة بالعقد الماضي'],
+      'Ruby': ['تركّز على سعادة المطوّر ووضوح الكود', 'مشهورة عبر إطار العمل Ruby on Rails', 'رائعة لبناء نماذج أولية بسرعة', 'أقل انتشارًا في سوق العمل اليوم'],
+      'R': ['مصممة خصيصًا للإحصاء والتحليل العلمي', 'قوية جدًا في الرسوم البيانية الإحصائية', 'مستخدمة بكثرة في الأبحاث الأكاديمية', 'أقل ملاءمة لتطوير البرمجيات العامة'],
+      'Kotlin': ['اللغة الرسمية الحديثة لتطوير أندرويد', 'تعمل على JVM بتوافق كامل مع جافا', 'صياغة أكثر إيجازًا وأمانًا من جافا', 'مجتمعها أصغر خارج نطاق أندرويد'],
+      'Scala': ['تجمع بين البرمجة الوظيفية والكائنية', 'ركيزة أساسية في معالجة البيانات الضخمة عبر Apache Spark', 'نظام أنواع قوي ومرن', 'منحنى تعلم متوسط إلى صعب'],
+      'SQL': ['ليست لغة برمجة عامة بل لغة استعلام قواعد بيانات', 'ضرورية تقريبًا لأي مطور مهما كان تخصصه', 'معيار موحّد تدعمه معظم قواعد البيانات', 'لا تكفي وحدها لبناء تطبيق كامل'],
+    };
+
+    const cmpA = document.getElementById('cmpA');
+    const cmpB = document.getElementById('cmpB');
+    if (cmpA && cmpB) {
+      langs.forEach((l, i) => {
+        cmpA.add(new Option(`${l.icon} ${l.name}`, l.name));
+        cmpB.add(new Option(`${l.icon} ${l.name}`, l.name));
+      });
+      cmpA.selectedIndex = 0;
+      cmpB.selectedIndex = 1;
+    }
+
+    function runCompare() {
+      const a = cmpA.value, b = cmpB.value;
+      const la = langs.find(l => l.name === a), lb = langs.find(l => l.name === b);
+      const box = document.getElementById('compareResult');
+      const grid = document.getElementById('compareGrid');
+      grid.innerHTML = [[la, a], [lb, b]].map(([l, name]) => `
+        <div class="compare-card" style="border-color:${l.color}44">
+          <h4 style="color:${l.color}">${l.icon} ${name}</h4>
+          <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.9rem">${l.use}</p>
+          <ul>${(langInfo[name] || []).map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>
+      `).join('');
+      box.classList.add('show');
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      unlockBadge('compare');
+    }
+
+    // ──────────────────────────────────────────────
+    //  ACHIEVEMENTS (session-only, no persistence)
+    //  Defined early so unlockBadge() is safe to call
+    //  from any feature initialized below (playground,
+    //  resources, etc. render synchronously on load).
+    // ──────────────────────────────────────────────
+    const badges = {
+      explorer: { emoji: '🧭', name: 'المستكشف', desc: 'وصلت إلى قسم المجالات' },
+      roadmap: { emoji: '📜', name: 'قارئ المسار', desc: 'استعرضت خارطة الطريق' },
+      playground: { emoji: '🎮', name: 'المجرّب', desc: 'شغّلت كودًا في الساحة الحية' },
+      compare: { emoji: '⚖️', name: 'الحكم', desc: 'قارنت بين لغتين' },
+      resources: { emoji: '📚', name: 'الباحث', desc: 'تصفّحت مصادر التعلم' },
+      quiz: { emoji: '🎯', name: 'مكتشف المسار', desc: 'أنهيت اختبار تحديد المسار' },
+    };
+    const unlocked = new Set();
+    const achievePanel = document.getElementById('achievePanel');
+    const badgeListEl = document.getElementById('badgeList');
+    if (badgeListEl) {
+      Object.entries(badges).forEach(([key, b]) => {
+        const row = document.createElement('div');
+        row.className = 'badge-row';
+        row.id = 'badge-' + key;
+        row.innerHTML = `<span class="badge-emoji">${b.emoji}</span><div><div class="badge-name">${b.name}</div><div class="badge-desc">${b.desc}</div></div>`;
+        badgeListEl.appendChild(row);
+      });
+    }
+    function unlockBadge(key) {
+      if (unlocked.has(key) || !badges[key]) return;
+      unlocked.add(key);
+      const row = document.getElementById('badge-' + key);
+      if (row) row.classList.add('unlocked');
+      document.getElementById('achCount').textContent = `${unlocked.size}/${Object.keys(badges).length}`;
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `${badges[key].emoji} إنجاز جديد: ${badges[key].name}`;
+      document.getElementById('toastWrap').appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+      updateCertHint();
+    }
+    function toggleAchievePanel() { achievePanel.classList.toggle('show'); }
+    document.addEventListener('click', e => {
+      if (achievePanel && achievePanel.classList.contains('show') && !e.target.closest('#achievePanel') && !e.target.closest('#achieveWidget')) {
+        achievePanel.classList.remove('show');
+      }
+    });
+    ['fields', 'roadmap'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const key = id === 'fields' ? 'explorer' : 'roadmap';
+      new IntersectionObserver((entries, o) => {
+        entries.forEach(e => { if (e.isIntersecting) { unlockBadge(key); o.disconnect(); } });
+      }, { threshold: 0.2 }).observe(el);
+    });
+
+    // ──────────────────────────────────────────────
+    //  PLAYGROUND
+    // ──────────────────────────────────────────────
+    const pgSnippets = {
+      'ترحيب تفاعلي': `<!-- عدّل النص واضغط تشغيل -->
+<style>
+  body { font-family: sans-serif; text-align:center; padding-top:60px; background:#0D1426; color:#F0F4FF; }
+  button { padding:10px 22px; border:none; border-radius:8px; background:#00D4FF; cursor:pointer; font-weight:700; }
+  h1 { font-size: 28px; }
+</style>
+<h1 id="msg">مرحبًا أيها المبرمج 👋</h1>
+<button onclick="document.getElementById('msg').textContent='أنت الآن تكتب كودًا حيًا! 🚀'">اضغط هنا</button>`,
+      'حاسبة بسيطة': `<style>
+  body { font-family: sans-serif; text-align:center; padding-top:40px; background:#0D1426; color:#F0F4FF; }
+  input { padding:8px; width:70px; border-radius:6px; border:1px solid #333; }
+  button { padding:8px 16px; border:none; border-radius:6px; background:#7C3AED; color:#fff; cursor:pointer; }
+</style>
+<input id="a" type="number" value="4"> + <input id="b" type="number" value="6">
+<button onclick="document.getElementById('r').textContent = Number(a.value) + Number(b.value)">=</button>
+<h2 id="r">10</h2>`,
+      'حلقة تكرار': `<style>body{font-family:monospace;background:#0D1426;color:#00FF88;padding:20px}</style>
+<div id="out"></div>
+<script>
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById('out').innerHTML += 'الخطوة رقم ' + i + '<br>';
+  }
+<\/script>`
+    };
+
+    let currentSnippet = Object.keys(pgSnippets)[0];
+    const pgTabsEl = document.getElementById('pgTabs');
+    const pgEditor = document.getElementById('pgEditor');
+    if (pgTabsEl) {
+      Object.keys(pgSnippets).forEach((name, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'pg-tab' + (i === 0 ? ' active' : '');
+        btn.textContent = name;
+        btn.onclick = () => {
+          document.querySelectorAll('.pg-tab').forEach(t => t.classList.remove('active'));
+          btn.classList.add('active');
+          currentSnippet = name;
+          pgEditor.value = pgSnippets[name];
+          runPlayground();
+        };
+        pgTabsEl.appendChild(btn);
+      });
+      pgEditor.value = pgSnippets[currentSnippet];
+    }
+
+    function runPlayground() {
+      const frame = document.getElementById('pgFrame');
+      if (!frame) return;
+      frame.srcdoc = pgEditor.value;
+      unlockBadge('playground');
+    }
+    if (pgEditor) setTimeout(runPlayground, 300);
+
+    // ──────────────────────────────────────────────
+    //  RESOURCES
+    // ──────────────────────────────────────────────
+    const resourcesData = {
+      web: [
+        { type: 'دورة تفاعلية مجانية', title: 'freeCodeCamp', desc: 'مناهج كاملة بالمجان في الويب وJavaScript مع شهادات إتمام.', url: 'https://www.freecodecamp.org' },
+        { type: 'توثيق رسمي', title: 'MDN Web Docs', desc: 'أدق وأشمل مرجع لـ HTML وCSS وJavaScript من موزيلا.', url: 'https://developer.mozilla.org' },
+        { type: 'منهج كامل', title: 'The Odin Project', desc: 'مسار مجاني متكامل لتعلم تطوير الويب من الصفر للاحتراف.', url: 'https://www.theodinproject.com' },
+      ],
+      ai: [
+        { type: 'دورة جامعية مجانية', title: 'Google ML Crash Course', desc: 'مقدمة عملية ومكثفة لتعلم الآلة من جوجل.', url: 'https://developers.google.com/machine-learning/crash-course' },
+        { type: 'منصة تدريب', title: 'Kaggle Learn', desc: 'دروس قصيرة وتطبيقية في بايثون وML مع بيانات حقيقية.', url: 'https://www.kaggle.com/learn' },
+        { type: 'مقالات ودروس', title: 'Real Python', desc: 'شروحات عميقة وعملية لكل ما يخص بايثون.', url: 'https://realpython.com' },
+      ],
+      mobile: [
+        { type: 'توثيق رسمي', title: 'Flutter Docs', desc: 'الدليل الرسمي الشامل لبناء تطبيقات بـ Flutter وDart.', url: 'https://docs.flutter.dev' },
+        { type: 'توثيق رسمي', title: 'React Native Docs', desc: 'مرجع كامل لبناء تطبيقات جوال بلغة JavaScript.', url: 'https://reactnative.dev' },
+      ],
+      cyber: [
+        { type: 'منصة تدريب عملي', title: 'TryHackMe', desc: 'تحديات وتمارين تفاعلية لتعلم الأمن السيبراني خطوة بخطوة.', url: 'https://tryhackme.com' },
+        { type: 'مرجع أمني', title: 'OWASP', desc: 'المرجع العالمي لأشهر الثغرات الأمنية في تطبيقات الويب.', url: 'https://owasp.org' },
+      ],
+      data: [
+        { type: 'منصة بيانات', title: 'Kaggle', desc: 'مسابقات وبيانات حقيقية لتطبيق مهارات تحليل البيانات.', url: 'https://www.kaggle.com' },
+        { type: 'دورة مجانية', title: 'freeCodeCamp Data Analysis', desc: 'مسار كامل لتحليل البيانات باستخدام بايثون.', url: 'https://www.freecodecamp.org' },
+      ],
+      gamedev: [
+        { type: 'منصة تعليمية رسمية', title: 'Unity Learn', desc: 'دروس رسمية مجانية لتعلم تطوير الألعاب بمحرك Unity.', url: 'https://learn.unity.com' },
+        { type: 'توثيق محرك مفتوح', title: 'Godot Docs', desc: 'دليل محرك الألعاب المفتوح المصدر والمجاني بالكامل.', url: 'https://docs.godotengine.org' },
+      ],
+      devops: [
+        { type: 'توثيق رسمي', title: 'Docker Docs', desc: 'الدليل الرسمي لتعلم الحاويات (Containers) من الصفر.', url: 'https://docs.docker.com' },
+        { type: 'توثيق رسمي', title: 'Kubernetes Docs', desc: 'المرجع الرسمي الشامل لإدارة الحاويات على نطاق واسع.', url: 'https://kubernetes.io/docs/home/' },
+      ],
+      general: [
+        { type: 'خرائط طريق', title: 'roadmap.sh', desc: 'خرائط طريق تفاعلية محدّثة لكل مجالات البرمجة تقريبًا.', url: 'https://roadmap.sh' },
+        { type: 'حل مسائل برمجية', title: 'LeetCode', desc: 'آلاف المسائل البرمجية لتطوير التفكير المنطقي وجاهزية المقابلات.', url: 'https://leetcode.com' },
+        { type: 'استضافة أكواد', title: 'GitHub Docs', desc: 'كل ما تحتاج معرفته عن Git وGitHub للتعاون البرمجي.', url: 'https://docs.github.com' },
+      ],
+    };
+    const resTabNames = { web: '🌐 ويب', ai: '🤖 ذكاء اصطناعي', mobile: '📱 جوال', cyber: '🔐 أمن سيبراني', data: '📊 بيانات', gamedev: '🎮 ألعاب', devops: '⚙️ DevOps', general: '📌 عام' };
+    const resTabsEl = document.getElementById('resTabs');
+    const resGridEl = document.getElementById('resGrid');
+    function renderResources(cat) {
+      resGridEl.innerHTML = resourcesData[cat].map(r => `
+        <a class="res-card" href="${r.url}" target="_blank" rel="noopener noreferrer">
+          <span class="res-type">${r.type}</span>
+          <h4>${r.title}</h4>
+          <p>${r.desc}</p>
+        </a>
+      `).join('');
+      unlockBadge('resources');
+    }
+    if (resTabsEl) {
+      Object.entries(resTabNames).forEach(([key, label], i) => {
+        const btn = document.createElement('button');
+        btn.className = 'res-tab' + (i === 0 ? ' active' : '');
+        btn.textContent = label;
+        btn.onclick = () => {
+          document.querySelectorAll('.res-tab').forEach(t => t.classList.remove('active'));
+          btn.classList.add('active');
+          renderResources(key);
+        };
+        resTabsEl.appendChild(btn);
+      });
+      renderResources('web');
+    }
+
+    // ──────────────────────────────────────────────
+    //  FAQ
+    // ──────────────────────────────────────────────
+    const faqData = [
+      { q: 'هل أحتاج لشهادة جامعية لأصبح مبرمجًا؟', a: 'لا، غالبية المبرمجين المحترفين اليوم تعلّموا ذاتيًا أو عبر دورات مكثفة. ما يهم فعليًا هو مهاراتك ومشاريعك، وليس شهادتك.' },
+      { q: 'كم من الوقت أحتاج لأتعلم البرمجة؟', a: 'تختلف المدة حسب المجال ووقتك اليومي، لكن غالبًا 6 إلى 12 شهرًا من التعلم المنتظم كافية للوصول لمستوى مبتدئ محترف قابل للتوظيف.' },
+      { q: 'ما هي أفضل لغة برمجة للبدء؟', a: 'Python وJavaScript هما الأكثر ترشيحًا للمبتدئين لبساطتهما ووفرة الموارد التعليمية حولهما.' },
+      { q: 'هل يمكنني تعلم البرمجة بدون إنترنت سريع أو جهاز قوي؟', a: 'نعم، أغلب لغات البرمجة تعمل على أي جهاز حديث، وكثير من الدورات المجانية يمكن تحميل موادها للعمل دون اتصال دائم.' },
+      { q: 'متى أبدأ بالبحث عن عمل أو فرصة تدريب؟', a: 'بمجرد أن يكون لديك مشروعان أو ثلاثة مشاريع حقيقية على محفظة أعمالك (Portfolio)، تكون جاهزًا للتقديم على فرص مبتدئة.' },
+    ];
+    const faqListEl = document.getElementById('faqList');
+    if (faqListEl) {
+      faqData.forEach((f, i) => {
+        const item = document.createElement('div');
+        item.className = 'faq-item';
+        item.innerHTML = `
+          <div class="faq-q"><span>${f.q}</span><span class="faq-plus">+</span></div>
+          <div class="faq-a"><p>${f.a}</p></div>
+        `;
+        item.querySelector('.faq-q').onclick = () => item.classList.toggle('open');
+        faqListEl.appendChild(item);
+      });
+    }
+
+    // ──────────────────────────────────────────────
+    //  CERTIFICATE GENERATOR
+    // ──────────────────────────────────────────────
+    function openCert(fieldName) {
+      const total = Object.keys(badges).length;
+      if (unlocked.size < total) {
+        const missing = Object.keys(badges).filter(k => !unlocked.has(k)).map(k => badges[k].name);
+        const toast = document.createElement('div');
+        toast.className = 'toast toast-warn';
+        toast.innerHTML = `🔒 أكمل جميع التحديات الست أولًا — تبقّى: ${missing.join('، ')}`;
+        document.getElementById('toastWrap').appendChild(toast);
+        setTimeout(() => toast.remove(), 3800);
+        // نفتح لوحة الإنجازات ونومض بها لتوجيه المستخدم لما تبقّى عليه
+        achievePanel.classList.add('show');
+        const widget = document.getElementById('achieveWidget');
+        widget.style.transition = 'none';
+        widget.style.borderColor = 'var(--rose)';
+        setTimeout(() => { widget.style.transition = 'all 0.6s'; widget.style.borderColor = ''; }, 900);
+        return;
+      }
+
+      const modal = document.getElementById('certModal');
+      const canvas = document.getElementById('certCanvas');
+      const ctx = canvas.getContext('2d');
+      const name = (window.prompt('اكتب اسمك ليظهر على الشهادة:', '') || 'مبرمج طموح').trim() || 'مبرمج طموح';
+
+      // background
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#0D1426');
+      grad.addColorStop(1, '#111827');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // border
+      ctx.strokeStyle = '#00D4FF';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(24, 24, canvas.width - 48, canvas.height - 48);
+      ctx.strokeStyle = 'rgba(124,58,237,0.5)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(38, 38, canvas.width - 76, canvas.height - 76);
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#8B9CC8';
+      ctx.font = '20px Arial';
+      ctx.fillText('CODE — عالم البرمجة', canvas.width / 2, 100);
+
+      ctx.fillStyle = '#F0F4FF';
+      ctx.font = 'bold 42px Arial';
+      ctx.fillText('شهادة إتمام اختبار تحديد المسار', canvas.width / 2, 190);
+
+      ctx.fillStyle = '#8B9CC8';
+      ctx.font = '22px Arial';
+      ctx.fillText('تُقدَّم هذه الشهادة إلى', canvas.width / 2, 270);
+
+      ctx.fillStyle = '#00D4FF';
+      ctx.font = 'bold 46px Arial';
+      ctx.fillText(name, canvas.width / 2, 335);
+
+      ctx.fillStyle = '#8B9CC8';
+      ctx.font = '22px Arial';
+      ctx.fillText('لاكتشاف مساره المثالي في مجال:', canvas.width / 2, 405);
+
+      ctx.fillStyle = '#7C3AED';
+      ctx.font = 'bold 38px Arial';
+      ctx.fillText(fieldName.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim(), canvas.width / 2, 460);
+
+      const d = new Date();
+      ctx.fillStyle = '#4A5580';
+      ctx.font = '16px Arial';
+      ctx.fillText(`${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`, canvas.width / 2, 560);
+
+      modal.classList.add('show');
+    }
+    function closeCert() { document.getElementById('certModal').classList.remove('show'); }
+    function downloadCert() {
+      const canvas = document.getElementById('certCanvas');
+      const link = document.createElement('a');
+      link.download = 'شهادتي-عالم-البرمجة.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+
+</html>
