@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -40,14 +40,28 @@
 
     html {
       scroll-behavior: smooth;
+      font-size: 17px;
     }
 
     body {
-      font-family: 'Cairo', sans-serif;
+      font-family: 'Tajawal', 'Cairo', sans-serif;
       background: var(--bg-deep);
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    p {
+      line-height: 1.85;
     }
 
     /* ─── STARFIELD ─── */
@@ -1073,7 +1087,7 @@
         pointer-events: none;
         z-index: 999;
         border-radius: 50%;
-        transform: translate(-50%, -50%);
+        will-change: transform;
       }
 
       #cursorDot {
@@ -1081,12 +1095,14 @@
         height: 6px;
         background: var(--electric);
         box-shadow: 0 0 10px var(--electric);
+        transform: translate3d(-50px, -50px, 0) translate(-50%, -50%);
       }
 
       #cursorRing {
         width: 32px;
         height: 32px;
         border: 1px solid rgba(0, 212, 255, 0.45);
+        transform: translate3d(-50px, -50px, 0) translate(-50%, -50%);
         transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s;
       }
 
@@ -1104,8 +1120,12 @@
     /* ─── TILT CARDS ─── */
     .tilt {
       will-change: transform;
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+      transition: box-shadow 0.15s ease-out;
       transform-style: preserve-3d;
+    }
+
+    .tilt-settle {
+      transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.15s ease-out;
     }
 
     /* ─── SCROLL REVEAL ─── */
@@ -1460,44 +1480,116 @@
       padding: 0 1.4rem 1.3rem;
     }
 
-    /* ─── CERTIFICATE MODAL ─── */
-    #certModal {
+    /* ─── CELEBRATION MODAL ─── */
+    #celebrateModal {
       position: fixed;
       inset: 0;
-      background: rgba(4, 6, 14, 0.82);
-      backdrop-filter: blur(6px);
+      background: rgba(4, 6, 14, 0.92);
+      backdrop-filter: blur(3px);
       z-index: 500;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
+      overflow: hidden;
     }
 
-    #certModal.show { display: flex; }
+    #celebrateModal.show { display: flex; }
 
-    .cert-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2rem;
-      max-width: 620px;
+    .celebrate-box {
+      position: relative;
+      background: linear-gradient(160deg, var(--bg-surface), var(--bg-card));
+      border: 1px solid rgba(255, 184, 0, 0.35);
+      border-radius: 22px;
+      padding: 3rem 2.4rem 2.4rem;
+      max-width: 560px;
       width: 100%;
       text-align: center;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 184, 0, 0.08);
+      animation: celebratePop 0.5s cubic-bezier(.22,1.4,.42,1) both;
+      overflow: hidden;
     }
 
-    #certCanvas {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 1.2rem;
-      border: 1px solid var(--border);
+    .celebrate-emoji {
+      font-size: 3.6rem;
+      display: block;
+      margin-bottom: 0.8rem;
+      animation: celebrateBounce 1.4s ease infinite;
+      will-change: transform;
     }
 
-    .cert-actions {
+    .celebrate-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--amber), var(--rose), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .celebrate-text {
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin-bottom: 1.6rem;
+    }
+
+    .celebrate-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .celebrate-badge-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 184, 0, 0.08);
+      border: 1px solid rgba(255, 184, 0, 0.3);
+      border-radius: 100px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .celebrate-actions {
       display: flex;
       gap: 0.8rem;
       justify-content: center;
       flex-wrap: wrap;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      top: -10%;
+      width: 8px;
+      height: 14px;
+      opacity: 0.9;
+      animation: confettiFall linear forwards;
+      animation-iteration-count: 1;
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+
+    @keyframes celebratePop {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes celebrateBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(-6deg); }
+    }
+
+    @keyframes confettiFall {
+      to { transform: translateY(720px) rotate(540deg); opacity: 0; }
     }
 
     /* ─── ACHIEVEMENTS WIDGET ─── */
@@ -1632,13 +1724,6 @@
       border-color: var(--rose) !important;
       box-shadow: 0 8px 24px rgba(255,77,109,0.25) !important;
       animation: toastIn 0.35s ease, toastOut 0.35s ease 3.4s forwards !important;
-    }
-
-    .cert-hint {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 0.9rem;
-      line-height: 1.7;
     }
 
     /* ─── LANG COMPARE ─── */
@@ -1939,12 +2024,14 @@
     <p>صُنع بـ ❤️ لكل من يريد تعلّم البرمجة · ابدأ اليوم، لا تنتظر الغد</p>
   </footer>
 
-  <div id="certModal">
-    <div class="cert-box">
-      <canvas id="certCanvas" width="1000" height="620"></canvas>
-      <div class="cert-actions">
-        <button class="btn-primary" onclick="downloadCert()">⬇ تحميل الشهادة</button>
-        <button class="btn-secondary" onclick="closeCert()">إغلاق</button>
+  <div id="celebrateModal">
+    <div class="celebrate-box" id="celebrateBox">
+      <span class="celebrate-emoji">🎉</span>
+      <h3 class="celebrate-title">مبروك! أنهيت الجلسة بالكامل</h3>
+      <p class="celebrate-text">اجتزت التحديات الست وتعرّفت على أهم أركان عالم البرمجة. هذه بداية رائعة — الخطوة التالية هي أن تفتح محررًا وتكتب أول سطر كود حقيقي في مشروعك.</p>
+      <div class="celebrate-badges" id="celebrateBadges"></div>
+      <div class="celebrate-actions">
+        <button class="btn-primary" onclick="closeCelebrate()">🚀 لنبدأ الترميز</button>
       </div>
     </div>
   </div>
@@ -2418,27 +2505,10 @@
     <div class="quiz-result-field">${field.name}</div>
     <p>${field.desc}</p>
     <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
-      <button class="btn-primary" onclick="openCert('${field.name.replace(/'/g, "\\'")}')">🎓 احصل على شهادتك</button>
       <button class="btn-secondary" onclick="restartQuiz()">🔄 أعِد الاختبار</button>
     </div>
-    <p class="cert-hint" id="certHint"></p>
   `;
       unlockBadge('quiz');
-      updateCertHint();
-    }
-
-    function updateCertHint() {
-      const hintEl = document.getElementById('certHint');
-      if (!hintEl) return;
-      const total = Object.keys(badges).length;
-      if (unlocked.size >= total) {
-        hintEl.innerHTML = '🎉 أكملت جميع التحديات الست — شهادتك جاهزة للاستخراج!';
-        hintEl.style.color = 'var(--green)';
-      } else {
-        const missing = Object.keys(badges).filter(k => !unlocked.has(k)).map(k => badges[k].name);
-        hintEl.innerHTML = `🔒 الشهادة تُفتح بعد إكمال التحديات الست (🏆) — تبقّى لديك: ${missing.join('، ')}`;
-        hintEl.style.color = 'var(--text-muted)';
-      }
     }
 
     function restartQuiz() {
@@ -2456,12 +2526,17 @@
     // ──────────────────────────────────────────────
     //  SCROLL PROGRESS BAR
     // ──────────────────────────────────────────────
-    window.addEventListener('scroll', () => {
+    let scrollTicking = false;
+    function updateScrollUI() {
       const h = document.documentElement;
       const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
       document.getElementById('scrollProgress').style.width = scrolled + '%';
       document.getElementById('backToTop').classList.toggle('show', h.scrollTop > 600);
-    });
+      scrollTicking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(updateScrollUI); }
+    }, { passive: true });
 
     // ──────────────────────────────────────────────
     //  CUSTOM CURSOR
@@ -2470,30 +2545,27 @@
       const dot = document.getElementById('cursorDot');
       const ring = document.getElementById('cursorRing');
       if (!dot || !ring || window.matchMedia('(hover: none)').matches) return;
-      let rx = 0, ry = 0, tx = 0, ty = 0;
+      let mx = 0, my = 0, rx = 0, ry = 0, started = false;
       window.addEventListener('mousemove', e => {
-        dot.style.left = e.clientX + 'px';
-        dot.style.top = e.clientY + 'px';
-        tx = e.clientX; ty = e.clientY;
-      });
+        mx = e.clientX; my = e.clientY;
+        if (!started) { started = true; rx = mx; ry = my; }
+      }, { passive: true });
       function loop() {
-        rx += (tx - rx) * 0.18;
-        ry += (ty - ry) * 0.18;
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
+        // الدائرة الصغيرة تتبع الماوس فورًا، والحلقة الخارجية تنساب خلفها بنعومة
+        dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+        rx += (mx - rx) * 0.2;
+        ry += (my - ry) * 0.2;
+        ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
         requestAnimationFrame(loop);
       }
-      loop();
+      requestAnimationFrame(loop);
+      const hoverSelector = 'a, button, input, textarea, select, .lang-card, .phase-card, .quiz-option, .field-tab, .faq-item, .tl-content';
       document.addEventListener('mouseover', e => {
-        if (e.target.closest('a, button, input, textarea, select, .lang-card, .phase-card, .quiz-option, .field-tab, .faq-item, .tl-content')) {
-          ring.classList.add('hover-cta');
-        }
-      });
+        if (e.target.closest(hoverSelector)) ring.classList.add('hover-cta');
+      }, { passive: true });
       document.addEventListener('mouseout', e => {
-        if (e.target.closest('a, button, input, textarea, select, .lang-card, .phase-card, .quiz-option, .field-tab, .faq-item, .tl-content')) {
-          ring.classList.remove('hover-cta');
-        }
-      });
+        if (e.target.closest(hoverSelector)) ring.classList.remove('hover-cta');
+      }, { passive: true });
     })();
 
     // ──────────────────────────────────────────────
@@ -2501,19 +2573,46 @@
     // ──────────────────────────────────────────────
     (function () {
       const selector = '.lang-card, .phase-card, .what-card, .tl-content';
+      let activeCard = null, rect = null, px = 0, py = 0, ticking = false;
+
+      function applyTilt() {
+        ticking = false;
+        if (!activeCard) return;
+        activeCard.style.transform = `perspective(700px) rotateX(${-py * 7}deg) rotateY(${px * 7}deg) translateY(-2px)`;
+      }
+
+      function resetCard(card) {
+        if (!card) return;
+        card.classList.add('tilt-settle');
+        card.style.transform = '';
+        if (card === activeCard) activeCard = null;
+      }
+
       document.addEventListener('mousemove', e => {
         const card = e.target.closest(selector);
-        if (!card) return;
-        card.classList.add('tilt');
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(700px) rotateX(${-py * 7}deg) rotateY(${px * 7}deg) translateY(-2px)`;
-      });
+        if (!card) {
+          if (activeCard) resetCard(activeCard);
+          return;
+        }
+        if (card !== activeCard) {
+          if (activeCard) resetCard(activeCard);
+          activeCard = card;
+          activeCard.classList.remove('tilt-settle');
+          activeCard.classList.add('tilt');
+          rect = card.getBoundingClientRect(); // قياس واحد فقط عند الدخول، وليس مع كل حركة
+        }
+        px = (e.clientX - rect.left) / rect.width - 0.5;
+        py = (e.clientY - rect.top) / rect.height - 0.5;
+        if (!ticking) { ticking = true; requestAnimationFrame(applyTilt); }
+      }, { passive: true });
+
       document.addEventListener('mouseleave', e => {
         const card = e.target.closest && e.target.closest(selector);
-        if (card) card.style.transform = '';
+        resetCard(card);
       }, true);
+
+      // إعادة قياس أبعاد البطاقة النشطة عند تغيير حجم النافذة أو التمرير الكبير
+      window.addEventListener('resize', () => { if (activeCard) rect = activeCard.getBoundingClientRect(); }, { passive: true });
     })();
 
     // ──────────────────────────────────────────────
@@ -2664,7 +2763,9 @@
       toast.innerHTML = `${badges[key].emoji} إنجاز جديد: ${badges[key].name}`;
       document.getElementById('toastWrap').appendChild(toast);
       setTimeout(() => toast.remove(), 3000);
-      updateCertHint();
+      if (unlocked.size === Object.keys(badges).length) {
+        setTimeout(showCelebration, 500);
+      }
     }
     function toggleAchievePanel() { achievePanel.classList.toggle('show'); }
     document.addEventListener('click', e => {
@@ -2844,86 +2945,34 @@
     }
 
     // ──────────────────────────────────────────────
-    //  CERTIFICATE GENERATOR
+    //  SESSION COMPLETION CELEBRATION
     // ──────────────────────────────────────────────
-    function openCert(fieldName) {
-      const total = Object.keys(badges).length;
-      if (unlocked.size < total) {
-        const missing = Object.keys(badges).filter(k => !unlocked.has(k)).map(k => badges[k].name);
-        const toast = document.createElement('div');
-        toast.className = 'toast toast-warn';
-        toast.innerHTML = `🔒 أكمل جميع التحديات الست أولًا — تبقّى: ${missing.join('، ')}`;
-        document.getElementById('toastWrap').appendChild(toast);
-        setTimeout(() => toast.remove(), 3800);
-        // نفتح لوحة الإنجازات ونومض بها لتوجيه المستخدم لما تبقّى عليه
-        achievePanel.classList.add('show');
-        const widget = document.getElementById('achieveWidget');
-        widget.style.transition = 'none';
-        widget.style.borderColor = 'var(--rose)';
-        setTimeout(() => { widget.style.transition = 'all 0.6s'; widget.style.borderColor = ''; }, 900);
-        return;
+    function spawnConfetti(container) {
+      const colors = ['#00D4FF', '#7C3AED', '#00FF88', '#FFB800', '#FF4D6D'];
+      for (let i = 0; i < 26; i++) {
+        const piece = document.createElement('span');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (2.2 + Math.random() * 1.6) + 's';
+        piece.style.animationDelay = (Math.random() * 0.6) + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        piece.addEventListener('animationend', () => piece.remove()); // تنظيف العنصر فور انتهاء سقوطه لتوفير الأداء
+        container.appendChild(piece);
       }
-
-      const modal = document.getElementById('certModal');
-      const canvas = document.getElementById('certCanvas');
-      const ctx = canvas.getContext('2d');
-      const name = (window.prompt('اكتب اسمك ليظهر على الشهادة:', '') || 'مبرمج طموح').trim() || 'مبرمج طموح';
-
-      // background
-      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, '#0D1426');
-      grad.addColorStop(1, '#111827');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // border
-      ctx.strokeStyle = '#00D4FF';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(24, 24, canvas.width - 48, canvas.height - 48);
-      ctx.strokeStyle = 'rgba(124,58,237,0.5)';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(38, 38, canvas.width - 76, canvas.height - 76);
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#8B9CC8';
-      ctx.font = '20px Arial';
-      ctx.fillText('CODE — عالم البرمجة', canvas.width / 2, 100);
-
-      ctx.fillStyle = '#F0F4FF';
-      ctx.font = 'bold 42px Arial';
-      ctx.fillText('شهادة إتمام اختبار تحديد المسار', canvas.width / 2, 190);
-
-      ctx.fillStyle = '#8B9CC8';
-      ctx.font = '22px Arial';
-      ctx.fillText('تُقدَّم هذه الشهادة إلى', canvas.width / 2, 270);
-
-      ctx.fillStyle = '#00D4FF';
-      ctx.font = 'bold 46px Arial';
-      ctx.fillText(name, canvas.width / 2, 335);
-
-      ctx.fillStyle = '#8B9CC8';
-      ctx.font = '22px Arial';
-      ctx.fillText('لاكتشاف مساره المثالي في مجال:', canvas.width / 2, 405);
-
-      ctx.fillStyle = '#7C3AED';
-      ctx.font = 'bold 38px Arial';
-      ctx.fillText(fieldName.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim(), canvas.width / 2, 460);
-
-      const d = new Date();
-      ctx.fillStyle = '#4A5580';
-      ctx.font = '16px Arial';
-      ctx.fillText(`${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`, canvas.width / 2, 560);
-
+    }
+    function showCelebration() {
+      const modal = document.getElementById('celebrateModal');
+      const box = document.getElementById('celebrateBox');
+      const badgesWrap = document.getElementById('celebrateBadges');
+      badgesWrap.innerHTML = Object.values(badges).map(b => `
+        <span class="celebrate-badge-chip">${b.emoji} ${b.name}</span>
+      `).join('');
+      box.querySelectorAll('.confetti-piece').forEach(el => el.remove());
+      spawnConfetti(box);
       modal.classList.add('show');
     }
-    function closeCert() { document.getElementById('certModal').classList.remove('show'); }
-    function downloadCert() {
-      const canvas = document.getElementById('certCanvas');
-      const link = document.createElement('a');
-      link.download = 'شهادتي-عالم-البرمجة.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }
+    function closeCelebrate() { document.getElementById('celebrateModal').classList.remove('show'); }
   </script>
 </body>
 
